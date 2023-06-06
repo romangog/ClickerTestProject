@@ -27,6 +27,7 @@ sealed class UpdateBusinessesIncomeProgressSystem : IEcsRunSystem, IEcsInitSyste
     {
         foreach (var entity in _boughtBusinessesFilter)
         {
+            // Update business income progress, fire event if income delay expired
             ref var businessView = ref _businessesViewsPool.Get(entity);
             var data = businessView.Data;
             var config = _configs.BusinessesList[data.Id];

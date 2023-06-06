@@ -21,6 +21,7 @@ sealed class InitializeBusinessesSystem : IEcsRunSystem, IEcsInitSystem
     {
         foreach (var entity in _uninitializedBusinessesFilter)
         {
+            // initialize multiple aspects of businesses
             _updateViewPool.Add(entity);
             _recountIncomeEvent.Add(entity);
             _initializedPool.Add(entity);

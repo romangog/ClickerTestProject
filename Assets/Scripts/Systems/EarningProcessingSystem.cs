@@ -34,13 +34,16 @@ sealed class EarningProcessingSystem : IEcsRunSystem, IEcsInitSystem
 
         foreach (var entity in _earnRequestsFilter)
         {
+            // Iterate through earning events, summarize them
             ref var earnRequest = ref _earningsPool.Get(entity);
             incomePerFrame += earnRequest.Earning;
             isNeedToUpdateView = true;
         }
 
+        // Add earned money to balance, rounding it
         _playerData.Balance += Mathf.FloorToInt(incomePerFrame);
 
+        // If balance has changed, update it's view
         if (isNeedToUpdateView)
             foreach (var entity in _balanceViewsFilter)
             {

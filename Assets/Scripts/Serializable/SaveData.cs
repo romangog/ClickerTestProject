@@ -11,6 +11,8 @@ public class SaveData
     {
         BoughtBusinesses = new List<BusinessData>();
 
+        // initialize New Game data
+
         BoughtBusinesses.Add(new BusinessData(
             1,
             0,

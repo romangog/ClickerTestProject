@@ -22,8 +22,8 @@ sealed class SaveLoadSystem : IEcsRunSystem, IEcsInitSystem
         _world = systems.GetWorld();
         _saveEventsFilter = _world.Filter<SaveEvent>().End();
 
+        // Load game data from JSON file or create new data
         string savePath = Application.persistentDataPath + "save";
-
         if (File.Exists(savePath))
         {
             using (var read = new StreamReader(savePath))
@@ -42,6 +42,7 @@ sealed class SaveLoadSystem : IEcsRunSystem, IEcsInitSystem
     {
         foreach (var entity in _saveEventsFilter)
         {
+            // Save game as JSON file on save event call
             string savePath = Application.persistentDataPath + "save";
             string json = JsonUtility.ToJson(_playerData.SaveData);
             using (var writer = new StreamWriter(savePath))

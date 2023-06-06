@@ -24,6 +24,7 @@ sealed class RecountBusinessIncomeNumberSystem : IEcsRunSystem, IEcsInitSystem
     {
         foreach (var entity in _businesssesFilter)
         {
+            // Update business income based on it's configs, upgrades and level
             ref var business = ref _businessesPool.Get(entity);
             var data = business.Data;
             var config = _configs.BusinessesList[data.Id];

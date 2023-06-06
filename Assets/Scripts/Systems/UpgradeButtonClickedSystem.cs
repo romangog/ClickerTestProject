@@ -39,16 +39,19 @@ sealed class UpgradeButtonClickedSystem : IEcsRunSystem, IEcsInitSystem
             var businessEntity = upgradeView.BusinessEntity;
             ref var businessView = ref _businessViewPool.Get(businessEntity);
             var businessData = businessView.Data;
-
+            // Ignore if upgrade is already bought
             if (businessData.UpgradesBought[upgradeViewId]) continue;
 
             var businessConfig = _configs.BusinessesList[businessData.Id];
             ref var spend = ref _spendMoneyPool.Add(_world.NewEntity());
+
+            // Fire spend request to buy upgrade
             spend.Price = businessConfig.Upgrades[upgradeView.Id].Cost;
             spend.ResponseEvent =
                 (success) =>
                 {
                     if (!success) return;
+                    // If purchase was successful, update data and view, and save the game
                     businessData.UpgradesBought[upgradeViewId] = true;
                     _updateViewPool.Add(businessEntity);
                     _saveEventsPool.Add(_world.NewEntity());

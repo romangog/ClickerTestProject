@@ -17,6 +17,7 @@ sealed class UpdateBusinessReactiveViewSystem : IEcsRunSystem, IEcsInitSystem
     {
         foreach (var entity in _businessesFilter)
         {
+            // Update all data on business view that changes only by player actions
             ref var businessView = ref _businessViewPool.Get(entity);
             businessView.Lvl.text = "LVL\n" + businessView.Data.Level;
             businessView.Income.text = "Доход\n" + businessView.Data.Income + "$";

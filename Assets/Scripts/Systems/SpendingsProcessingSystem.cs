@@ -34,6 +34,7 @@ sealed class SpendingsProcessingSystem : IEcsRunSystem, IEcsInitSystem
         bool isBalanceChanged = false;
         foreach (var entity in _spendRequestsFilter)
         {
+            // Check spend requests, approve it if possible
             ref var spendRequest = ref _spendRequestsPool.Get(entity);
             if (_playerData.Balance >= spendRequest.Price)
             {
@@ -47,6 +48,7 @@ sealed class SpendingsProcessingSystem : IEcsRunSystem, IEcsInitSystem
             }
         }
 
+        // If money were spend, update balance view
         if (isBalanceChanged)
             foreach (var entity in _balanceViewsFilter)
             {

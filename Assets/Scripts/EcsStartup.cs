@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using System.IO;
 using UnityEngine;
 
 public class EcsStartup : MonoBehaviour
@@ -55,10 +54,6 @@ public class EcsStartup : MonoBehaviour
                 .Add(new EventDeleteSystem<BusinessIncomeEvent>())
                 .Add(new EventDeleteSystem<EarnMoneyEvent>())
                 .Init();
-
-
-
-
     }
 
     void Update()

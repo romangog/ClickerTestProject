@@ -19,9 +19,11 @@ sealed class AccountBusinessIncomeSystem : IEcsRunSystem, IEcsInitSystem
     {
         foreach (var entity in _businessesFilter)
         {
+            // Fire earn event from business income
             ref var businessView = ref _businessesViewPool.Get(entity);
             ref var earnMoney = ref _earnMoneyEventsPool.Add(_world.NewEntity());
             var data = businessView.Data;
+
             earnMoney.Earning = data.Income;
         }
     }

@@ -14,6 +14,7 @@ sealed class EventDeleteSystem<T> : IEcsRunSystem, IEcsInitSystem where T : stru
 
     public void Run(IEcsSystems systems)
     {
+        // Delete OneFrame Events
         foreach (var entity in _eventsFilter)
         {
             _clicksPool.Del(entity);

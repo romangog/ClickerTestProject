@@ -18,29 +18,21 @@ MonoBehaviour:
     BaseCost: 3
     BaseIncome: 3
     Upgrades:
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0432\u043E\u0433\u043E
-        1"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
       Cost: 50
       IncomeAddPercent: 50
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0432\u043E\u0433\u043E
-        2"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
       Cost: 400
       IncomeAddPercent: 100
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0432\u043E\u0433\u043E
-        3"
-      Cost: 10
-      IncomeAddPercent: 1000
   - Name: "\u0412\u0442\u043E\u0440\u043E\u0439 \u0431\u0438\u0437\u043D\u0435\u0441"
     IncomeDelay: 6
     BaseCost: 40
     BaseIncome: 40
     Upgrades:
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0432\u0442\u043E\u0440\u043E\u0433\u043E
-        1"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
       Cost: 1200
       IncomeAddPercent: 100
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0432\u0442\u043E\u0440\u043E\u0433\u043E
-        2"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
       Cost: 4000
       IncomeAddPercent: 200
   - Name: "\u0422\u0440\u0435\u0442\u0438\u0439 \u0431\u0438\u0437\u043D\u0435\u0441"
@@ -48,12 +40,10 @@ MonoBehaviour:
     BaseCost: 200
     BaseIncome: 200
     Upgrades:
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0442\u0440\u0435\u0442\u044C\u0435\u0433\u043E
-        1"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
       Cost: 6000
       IncomeAddPercent: 100
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0442\u0440\u0435\u0442\u044C\u0435\u0433\u043E 
-        2"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
       Cost: 20000
       IncomeAddPercent: 150
   - Name: "\u0427\u0435\u0442\u0432\u0435\u0440\u0442\u044B\u0439 \u0431\u0438\u0437\u043D\u0435\u0441"
@@ -61,12 +51,10 @@ MonoBehaviour:
     BaseCost: 1000
     BaseIncome: 1000
     Upgrades:
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0447\u0435\u0442\u0432\u0435\u0440\u0442\u043E\u0433\u043E
-        1"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
       Cost: 15000
       IncomeAddPercent: 100
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0447\u0435\u0442\u0432\u0435\u0440\u0442\u043E\u0433\u043E 
-        2"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
       Cost: 50000
       IncomeAddPercent: 200
   - Name: "\u041F\u044F\u0442\u044B\u0439 \u0431\u0438\u0437\u043D\u0435\u0441"
@@ -74,11 +62,9 @@ MonoBehaviour:
     BaseCost: 5000
     BaseIncome: 5000
     Upgrades:
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u043F\u044F\u0442\u043E\u0433\u043E
-        1"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
       Cost: 100000
       IncomeAddPercent: 200
-    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u043F\u044F\u0442\u043E\u0433\u043E 
-        2"
+    - UpgradeName: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
       Cost: 500000
       IncomeAddPercent: 400

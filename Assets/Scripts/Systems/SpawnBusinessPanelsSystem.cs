@@ -39,7 +39,7 @@ sealed class SpawnBusinessPanelsSystem : IEcsRunSystem, IEcsInitSystem
 
         _boughtBusinessEventsFilter = _world.Filter<UnlockedNewBusinessEvent>().End();
 
-        // Spawn businesses at start
+        // Spawn businesses at start based on player data
         foreach (var entity in _businessesListFilter)
         {
             ref var businessList = ref _businessesListPool.Get(entity);
@@ -57,6 +57,7 @@ sealed class SpawnBusinessPanelsSystem : IEcsRunSystem, IEcsInitSystem
         {
             foreach (var businessListEntity in _businessesListFilter)
             {
+                // Spawn new business when previous gets first level up
                 _saveEventsPool.Add(_world.NewEntity());
                 if (_playerData.BoughtBusinesses.Count == _businessesConfigs.BusinessesList.Length) return;
                 ref var businessList = ref _businessesListPool.Get(businessListEntity);
@@ -74,18 +75,23 @@ sealed class SpawnBusinessPanelsSystem : IEcsRunSystem, IEcsInitSystem
         }
     }
 
+    // Spawn business view, associate it with data, display static data (name, upgrade effects etc)
     private void SpawnBusinessPanel(Transform parent, int id)
     {
+        // Spawn business panel
         var businessEntityView = GameObject.Instantiate(_prefabs.BusinessPanelPrefab, parent);
+        // Initialize MonoBehaviour Entity holder in purpose to access it immediately
         businessEntityView.InitializeEntity();
         ref var businessView = ref _businessComponentsPool.Get(businessEntityView.Entity);
         var businessConfig = _businessesConfigs.BusinessesList[id];
         businessView.Name.text = businessConfig.Name;
+        // Associate business view with business data
         businessView.Data = _playerData.BoughtBusinesses[id];
         businessView.Data.NextLevelCost = businessConfig.BaseCost * (businessView.Data.Level + 1);
         businessView.LvlUpBusinessButtonComponent.SetBusinessEntity(businessEntityView.Entity);
-        businessView.UpgradeButtonsEntities = new int[businessConfig.Upgrades.Length];
 
+        // Spawn upgrades according to business config, display non-changing data
+        businessView.UpgradeButtonsEntities = new int[businessConfig.Upgrades.Length];
         for (int j = 0; j < businessConfig.Upgrades.Length; j++)
         {
             var upgradeConfig = businessConfig.Upgrades[j];
