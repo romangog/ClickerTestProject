@@ -21,6 +21,7 @@ public class EcsStartup : MonoBehaviour
     private PlayerData _playerData;
     private BusinessesConfigs _configs;
     private Prefabs _prefabs;
+    private bool _savedGame;
 
     void Awake()
     {
@@ -29,19 +30,7 @@ public class EcsStartup : MonoBehaviour
 
         _playerData = new PlayerData();
 
-        string savePath = Application.persistentDataPath + "save";
-        if (File.Exists(savePath))
-        {
-            using (var read = new StreamReader(savePath))
-            {
-                string json = read.ReadToEnd();
-                _playerData.CopyFrom(JsonUtility.FromJson<SaveData>(json));
-            }
-        }
-        else
-        {
-            _playerData.CopyFrom(new SaveData(_configs));
-        }
+        LoadGame();
     }
 
     private void Start()
@@ -89,14 +78,39 @@ public class EcsStartup : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+    private void OnApplicationFocus(bool focus)
     {
-        // Save game as JSON file on quit
-        string savePath = Application.persistentDataPath + "save";
-        string json = JsonUtility.ToJson(_playerData.SaveData);
-        using (var writer = new StreamWriter(savePath))
+        if (!focus && !_savedGame)
         {
-            writer.Write(json);
+            SaveGame();
         }
+    }
+
+    private void OnApplicationPause(bool paused)
+    {
+        if (paused && !_savedGame)
+        {
+            SaveGame();
+        }
+    }
+
+    private void LoadGame()
+    {
+        string json = PlayerPrefs.GetString("saveData");// Save game as JSON file on quit
+        if (json == "")
+        {
+            _playerData.CopyFrom(new SaveData(_configs));
+        }
+        else
+        {
+            _playerData.CopyFrom(JsonUtility.FromJson<SaveData>(json));
+        }
+    }
+
+    private void SaveGame()
+    {
+        string json = JsonUtility.ToJson(_playerData.SaveData);
+        PlayerPrefs.SetString("saveData", json);// Save game as JSON file on quit
+        _savedGame = true;
     }
 }
