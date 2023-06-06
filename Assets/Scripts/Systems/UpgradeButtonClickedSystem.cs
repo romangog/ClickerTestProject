@@ -9,7 +9,6 @@ sealed class UpgradeButtonClickedSystem : IEcsRunSystem, IEcsInitSystem
     private EcsPool<BusinessViewComponent> _businessViewPool;
     private EcsPool<UpdateViewEvent> _updateViewPool;
     private EcsPool<TrySpendMoneyRequest> _spendMoneyPool;
-    private EcsPool<SaveEvent> _saveEventsPool;
 
     private EcsWorld _world;
 
@@ -27,7 +26,6 @@ sealed class UpgradeButtonClickedSystem : IEcsRunSystem, IEcsInitSystem
         _businessViewPool = _world.GetPool<BusinessViewComponent>();
         _updateViewPool = _world.GetPool<UpdateViewEvent>();
         _spendMoneyPool = _world.GetPool<TrySpendMoneyRequest>();
-        _saveEventsPool = _world.GetPool<SaveEvent>();
     }
 
     public void Run(IEcsSystems systems)
@@ -54,7 +52,6 @@ sealed class UpgradeButtonClickedSystem : IEcsRunSystem, IEcsInitSystem
                     // If purchase was successful, update data and view, and save the game
                     businessData.UpgradesBought[upgradeViewId] = true;
                     _updateViewPool.Add(businessEntity);
-                    _saveEventsPool.Add(_world.NewEntity());
                 };
         }
     }

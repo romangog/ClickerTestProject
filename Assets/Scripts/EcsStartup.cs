@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using System.IO;
 using UnityEngine;
 
 public class EcsStartup : MonoBehaviour
@@ -27,14 +28,26 @@ public class EcsStartup : MonoBehaviour
         _prefabs = Resources.Load<Prefabs>("Prefabs");
 
         _playerData = new PlayerData();
+
+        string savePath = Application.persistentDataPath + "save";
+        if (File.Exists(savePath))
+        {
+            using (var read = new StreamReader(savePath))
+            {
+                string json = read.ReadToEnd();
+                _playerData.CopyFrom(JsonUtility.FromJson<SaveData>(json));
+            }
+        }
+        else
+        {
+            _playerData.CopyFrom(new SaveData(_configs));
+        }
     }
 
     private void Start()
     {
         _systems = new EcsSystems(World, _configs);
         _systems
-             .Add(new SaveLoadSystem(_playerData, _configs))
-                .Add(new EventDeleteSystem<SaveEvent>())
              .Add(new SpawnBusinessPanelsSystem(_configs, _playerData, _prefabs))
                 .Add(new EventDeleteSystem<UnlockedNewBusinessEvent>())
              .Add(new InitializeBusinessesSystem())
@@ -73,6 +86,17 @@ public class EcsStartup : MonoBehaviour
         {
             _world.Destroy();
             _world = null;
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        // Save game as JSON file on quit
+        string savePath = Application.persistentDataPath + "save";
+        string json = JsonUtility.ToJson(_playerData.SaveData);
+        using (var writer = new StreamWriter(savePath))
+        {
+            writer.Write(json);
         }
     }
 }

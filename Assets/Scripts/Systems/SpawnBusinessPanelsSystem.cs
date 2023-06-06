@@ -13,7 +13,6 @@ sealed class SpawnBusinessPanelsSystem : IEcsRunSystem, IEcsInitSystem
     private EcsPool<BusinessViewComponent> _businessComponentsPool;
     private EcsPool<UpgradeBusinessButtonComponent> _upgradeButtonsViewPool;
     private EcsPool<BusinessWorkingTag> _businessWorkingPool;
-    private EcsPool<SaveEvent> _saveEventsPool;
 
     private EcsWorld _world;
 
@@ -35,7 +34,6 @@ sealed class SpawnBusinessPanelsSystem : IEcsRunSystem, IEcsInitSystem
         _businessComponentsPool = _world.GetPool<BusinessViewComponent>();
         _upgradeButtonsViewPool = _world.GetPool<UpgradeBusinessButtonComponent>();
         _businessWorkingPool = _world.GetPool<BusinessWorkingTag>();
-        _saveEventsPool = _world.GetPool<SaveEvent>();
 
         _boughtBusinessEventsFilter = _world.Filter<UnlockedNewBusinessEvent>().End();
 
@@ -58,7 +56,6 @@ sealed class SpawnBusinessPanelsSystem : IEcsRunSystem, IEcsInitSystem
             foreach (var businessListEntity in _businessesListFilter)
             {
                 // Spawn new business when previous gets first level up
-                _saveEventsPool.Add(_world.NewEntity());
                 if (_playerData.BoughtBusinesses.Count == _businessesConfigs.BusinessesList.Length) return;
                 ref var businessList = ref _businessesListPool.Get(businessListEntity);
                 int id = _playerData.BoughtBusinesses.Count;

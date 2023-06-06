@@ -12,7 +12,6 @@ sealed class LvlUpButtonClickedSystem : IEcsRunSystem, IEcsInitSystem
     private EcsPool<TrySpendMoneyRequest> _spendMoneyPool;
     private EcsPool<BusinessWorkingTag> _businessWorkingPool;
     private EcsPool<UnlockedNewBusinessEvent> _unlockedNewBusinessEventPool;
-    private EcsPool<SaveEvent> _saveEventsPool;
     private EcsWorld _world;
 
     public LvlUpButtonClickedSystem(
@@ -31,7 +30,6 @@ sealed class LvlUpButtonClickedSystem : IEcsRunSystem, IEcsInitSystem
         _spendMoneyPool = _world.GetPool<TrySpendMoneyRequest>();
         _businessWorkingPool = _world.GetPool<BusinessWorkingTag>();
         _unlockedNewBusinessEventPool = _world.GetPool<UnlockedNewBusinessEvent>();
-        _saveEventsPool = _world.GetPool<SaveEvent>();
     }
 
     public void Run(IEcsSystems systems)
@@ -56,11 +54,7 @@ sealed class LvlUpButtonClickedSystem : IEcsRunSystem, IEcsInitSystem
                         _unlockedNewBusinessEventPool.Add(_world.NewEntity());
                         _businessWorkingPool.Add(businessEntity);
                     }
-                    else
-                    {
-                        // Save game
-                        _saveEventsPool.Add(_world.NewEntity());
-                    }
+
                     // Update level and calculate next level cost, then update business panel view
                     businessData.Level++;
                     businessData.NextLevelCost = (businessData.Level + 1) * _configs.BusinessesList[businessData.Id].BaseCost;
